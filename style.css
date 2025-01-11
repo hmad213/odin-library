@@ -1,0 +1,181 @@
+:root{
+    font-family: "Kanit", serif;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.header{
+    height: 80px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    align-content: center;
+    text-align: center;
+}
+
+.body{
+    padding: 100px;
+}
+
+.text{
+    text-align: center;
+}
+
+.text > h2{
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.text > .add-book{
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    background-color: #F40009;
+    color: white;
+    cursor: pointer;
+}
+
+.text > .add-book:hover{
+    background-color: #cc0007;
+}
+
+dialog{
+    position: absolute;
+    padding: 30px;
+    width: 300px;
+    margin: auto;
+    border-radius: 10px;
+    overflow: visible;
+    border: none;
+    font-size: 18px;
+}
+
+dialog > button{
+    padding: 5px;
+    border-radius: 8px;
+    border: none;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background-color: white;
+    cursor: pointer;
+}
+
+dialog img{
+    width: 20px;
+}
+
+form{
+    display: grid;
+    gap: 10px;
+}
+
+form input[type="text"], form input[type="number"]{
+    font-size: 1em;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(240, 240, 240);
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;;
+}
+
+form input[type="checkbox"]{
+    margin: auto;
+    width: 30px;
+    height: 30px;
+    background-color: rgb(240, 240, 240);
+    cursor: pointer;
+    box-shadow: rgb(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+form > button{
+    background-color: #F40009;
+    border: none;
+    border-radius: 20px;
+    font-size: 1em;
+    padding: 10px 0px;
+    color: white;
+    cursor: pointer;
+}
+
+form > button:hover{
+    background-color: #cc0007;
+}
+
+form > div{
+    display: grid;
+}
+
+.book-container{
+    display: none;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-auto-rows: 400px;
+    gap: 50px;
+}
+
+.book-container > div{
+    background-color: rgb(240, 240, 240);
+    border-radius: 15px;
+    box-shadow: rgb(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.book-container > .add-book{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.book-container > .add-book:hover{
+    background-color: rgb(197, 197, 197);
+}
+
+.add-book img{
+    width: 80px;
+}
+
+.book {
+    padding: 30px;
+    font-size: 1.5rem;
+    text-align: center;
+    position: relative;
+}
+
+.book button{
+    position: absolute;
+    font-size: 1em;
+    border: none;
+    border-radius: 10px;
+    box-shadow: rgb(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    cursor: pointer;
+    padding: 5px 0;
+}
+
+.book .read-button{
+    bottom: 60px;
+    left: 20px;
+    width: 89%;
+}
+
+.book .remove-button{
+    bottom: 15px;
+    left: 20px;
+    width: 89%;
+}
+
+.checked{
+    background-color: rgb(9, 129, 9);
+}
+
+.unchecked, .remove-button{
+    background-color: rgb(253, 10, 10);
+}
+
+.book .checked:hover{
+    background-color: rgb(8, 122, 8);
+}
+
+.book .unchecked:hover, .remove-button:hover{
+    background-color: rgb(204, 7, 7);
+}
