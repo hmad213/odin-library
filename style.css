@@ -34,6 +34,7 @@
     background-color: #F40009;
     color: white;
     cursor: pointer;
+    margin-bottom: 30px;
 }
 
 .text > .add-book:hover{
@@ -139,11 +140,18 @@ form > div{
     padding: 30px;
     font-size: 1.5rem;
     text-align: center;
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.book .buttons{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;   
 }
 
 .book button{
-    position: absolute;
     font-size: 1em;
     border: none;
     border-radius: 10px;
@@ -152,30 +160,26 @@ form > div{
     padding: 5px 0;
 }
 
-.book .read-button{
-    bottom: 60px;
-    left: 20px;
-    width: 89%;
-}
-
-.book .remove-button{
-    bottom: 15px;
-    left: 20px;
-    width: 89%;
-}
-
 .checked{
-    background-color: rgb(9, 129, 9);
+    background-color: #b2ec5d;
 }
 
-.unchecked, .remove-button{
-    background-color: rgb(253, 10, 10);
+.unchecked{
+    background-color: #ff2400;
+}
+
+.remove-button{
+    background-color: white;
 }
 
 .book .checked:hover{
-    background-color: rgb(8, 122, 8);
+    background-color: #9bcc50
 }
 
-.book .unchecked:hover, .remove-button:hover{
-    background-color: rgb(204, 7, 7);
+.book .unchecked:hover{
+    background-color: #ce1e03;
+}
+
+.book .remove-button:hover{
+    background-color: rgb(223, 222, 222);
 }
