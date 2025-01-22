@@ -6,33 +6,53 @@ const textDiv = document.querySelector(".text");
 const bookContainer = document.querySelector(".book-container");
 const form = document.querySelector("form");
 
-function Book(title, author, pages, read){
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-    this.info = function(){
-        if(this.read){
-            return `${this.title} by ${this.author}, ${this.pages} pages, not read yet`;
-        }
-        return `${this.title} by ${this.author}, ${this.pages} pages, read`;
-    };
+class Book{
+    constructor(title, author, pages, read){
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+        this.info = function(){
+            if(this.read){
+                return `${this.title} by ${this.author}, ${this.pages} pages, not read yet`;
+            }
+            return `${this.title} by ${this.author}, ${this.pages} pages, read`;
+        };
+    }
 }
 
-function addBookToLibrary(title, author, pages, read) {
-    myLibrary.push(new Book(title, author, pages, read));
+class Library{
+    myLibrary = [];
+
+    addBookToLibrary(title, author, pages, read) {
+        this.myLibrary.push(new Book(title, author, pages, read));
+    }
+
+    toggleRead(index){
+        this.myLibrary[index].read = !this.myLibrary[index].read
+    }
+
+    removeBookFromLibrary(index){
+        this.myLibrary.splice(index, 1);
+    }
+}
+
+let library = new Library();
+
+function updateBooks(title, author, pages, read){
+    library.addBookToLibrary(title, author, pages, read);
     const bookDiv = document.createElement("div");
     bookDiv.classList.add("book");
-    if(myLibrary.length === 1){
+    if(library.myLibrary.length === 1){
         toggleText();
     }
-    for(let i = 0; i < myLibrary.length; i++){
+    for(let i = 0; i < library.myLibrary.length; i++){
         bookDiv.innerHTML = `<p class="book-index">Book ${i+1}</p>
-                            <p><em>${myLibrary[i].title}</em></p>
-                            <p>By ${myLibrary[i].author}</p>
-                            <p>Pages: ${myLibrary[i].pages}</p>
+                            <p><em>${library.myLibrary[i].title}</em></p>
+                            <p>By ${library.myLibrary[i].author}</p>
+                            <p>Pages: ${library.myLibrary[i].pages}</p>
                             <div class="buttons">
-                                <button class="read-button ${myLibrary[i].read ? "checked" : "unchecked"}">${myLibrary[i].read ? "Read" : "Not Read"}</button>
+                                <button class="read-button ${library.myLibrary[i].read ? "checked" : "unchecked"}">${library.myLibrary[i].read ? "Read" : "Not Read"}</button>
                                 <button class="remove-button">Remove</button>
                             </div>`
         bookContainer.insertBefore(bookDiv, document.querySelector(".book-container .add-book"));
@@ -51,10 +71,10 @@ function toggleText(){
     }
 }
 
-function toggleRead(target){
+function toggleReadDisplay(target){
     let index = parseInt(target.parentNode.parentNode.firstChild.textContent.split(" ")[1]);
-    myLibrary[index-1].read = !myLibrary[index-1].read;
-    if(myLibrary[index-1].read){
+    library.toggleRead(index-1)
+    if(library.myLibrary[index-1].read){
         target.classList.add("checked");
         target.classList.remove("unchecked");
     }else{
@@ -63,16 +83,16 @@ function toggleRead(target){
     }
 }
 
-function removeBookFromLibrary(target){
+function removeBook(target){
     let books = document.querySelectorAll(".book");
     for(let i = 0; i < books.length; i++){
         if(books[i] == target.parentNode.parentNode){
-            myLibrary.splice(i, 1);
+            library.removeBookFromLibrary(i)
         }
     }
     target.parentNode.parentNode.remove();
-    if(myLibrary.length == 0){
-        toggleText()
+    if(library.myLibrary.length == 0){
+        toggleText();
     }else{
         books = document.querySelectorAll(".book");
         for(let i = 0; i < books.length; i++){
@@ -84,8 +104,8 @@ function removeBookFromLibrary(target){
 function addButtonEvents(){
     let readButtons = document.querySelectorAll(".read-button");
     let removeButtons = document.querySelectorAll(".remove-button");
-    readButtons[readButtons.length - 1].addEventListener("click", (event) => toggleRead(event.target));
-    removeButtons[removeButtons.length - 1].addEventListener("click", (event) => removeBookFromLibrary(event.target));
+    readButtons[readButtons.length - 1].addEventListener("click", (event) => toggleReadDisplay(event.target));
+    removeButtons[removeButtons.length - 1].addEventListener("click", (event) => removeBook(event.target));
 }
 
 addBookButtons.forEach((button) => button.addEventListener("click", () => dialog.showModal()))
@@ -99,7 +119,7 @@ form.addEventListener("submit", (e) => {
         let author = document.querySelector("#author").value;
         let pages = document.querySelector("#pages").value;
         let read = document.querySelector("#read").checked;
-        addBookToLibrary(title, author, pages, read);
+        updateBooks(title, author, pages, read);
         form.reset();
         dialog.close();
     } else {
