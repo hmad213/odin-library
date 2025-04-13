@@ -76,8 +76,10 @@ function toggleReadDisplay(target){
     library.toggleRead(index-1)
     if(library.myLibrary[index-1].read){
         target.classList.add("checked");
+        target.textContent = "Read";
         target.classList.remove("unchecked");
     }else{
+        target.textContent = "Not Read";
         target.classList.add("unchecked");
         target.classList.remove("checked");
     }
